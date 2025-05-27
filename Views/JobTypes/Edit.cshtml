@@ -1,0 +1,38 @@
+﻿@model ElevateWorkForce.Models.JobType
+
+@{
+    ViewData["Title"] = "Edit Job Type";
+}
+
+<div class="jobtype-container">
+    <div class="jobtype-header">
+        <h2>Edit Job Type</h2>
+        <p class="text-muted">Modify the selected job type</p>
+    </div>
+
+    <form asp-action="Edit" class="jobtype-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" placeholder="Enter job type name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="jobtype-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-content-save"></i> Save Changes
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="mdi mdi-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

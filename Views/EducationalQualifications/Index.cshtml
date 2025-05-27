@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ElevateWorkForce.Models.EducationalQualification>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jobtype-container">
+    <h1 class="jobtype-header">Educational Qualifications</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table class="jobtype-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Board)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Board)
+                    </td>
+                    <td>
+                        <div class="action-links">
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="color: #e53e3e;">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

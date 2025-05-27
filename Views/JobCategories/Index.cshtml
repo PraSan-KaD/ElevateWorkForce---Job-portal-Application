@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ElevateWorkForce.Models.JobCategory>
+
+@{
+    ViewData["Title"] = "Job Categories";
+}
+
+<div class="jobtype-container">
+    <div class="jobtype-header">
+        <h2>Job Categories</h2>
+    </div>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table class="jobtype-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Name)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td class="action-links">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="color: #e53e3e;">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

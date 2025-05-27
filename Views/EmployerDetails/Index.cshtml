@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ElevateWorkForce.Models.EmployerDetails>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="jobtype-header">Company</h1>
+
+<p>
+    <a asp-action="Create" class="btn-primary" style="color: white; text-decoration: none; display: inline-block;">Create New</a>
+</p>
+
+<div class="jobtype-container" style="max-width: 1100px; overflow-x: auto;">
+    <table class="jobtype-table" style="width: 100%; ">
+        <thead>
+            <tr>
+                <th style="width: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.Name)</th>
+                <th style="width: 25%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.Address)</th>
+                <th style="width: 10%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.Phone)</th>
+                <th style="width: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.PrimaryContactPerson)</th>
+                <th style="width: 20%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.Email)</th>
+                <th style="width: 10%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.DisplayNameFor(model => model.UserId)</th>
+                <th style="width: 5%; white-space: nowrap;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="word-wrap: break-word;">@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td style="word-wrap: break-word;">@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                    <td style="word-wrap: break-word;">@Html.DisplayFor(modelItem => item.PrimaryContactPerson)</td>
+                    <td style="word-wrap: break-word;">@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                    <td class="action-links" style="white-space: nowrap;">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="color: #e53e3e;">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

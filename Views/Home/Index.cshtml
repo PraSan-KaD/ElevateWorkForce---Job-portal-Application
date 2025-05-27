@@ -1,0 +1,678 @@
+﻿
+@model ElevateWorkForce.NewFolder.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<link href="https://cdn.jsdelivr.net/npm/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f8fafc;
+        font-family: 'Poppins', sans-serif;
+        color: #2e2e3a;
+    }
+
+    /* Modern Card Design */
+    .stat-card {
+        border-radius: 16px;
+        padding: 2rem;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #fff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: default;
+        border: none;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: rotate(45deg) translateX(20px);
+        }
+
+    .stat-icon {
+        font-size: 3rem;
+        opacity: 0.9;
+        margin-bottom: 1rem;
+        align-self: flex-end;
+    }
+
+    /* Vibrant Gradient Colors */
+    .bg-sky {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .bg-purple {
+        background: linear-gradient(135deg, #9F7AEA 0%, #667EEA 100%);
+    }
+
+    .bg-yellow {
+        background: linear-gradient(135deg, #F6D365 0%, #FDA085 100%);
+    }
+
+    .stat-text h6 {
+        margin: 0;
+        font-size: 1.8rem;
+        letter-spacing: 0.03em;
+        font-weight: 800;
+        opacity: 0.9;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        margin-top: 0.5rem;
+    }
+
+    /* Enhanced Pie Chart */
+    .chart-title {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #4a5568;
+        margin: 3rem 0 1.5rem 0;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0 1.5rem;
+    }
+
+        .chart-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #9F7AEA);
+            border-radius: 2px;
+        }
+
+    .chart-container {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        max-width: 700px;
+        margin: 0 auto  auto;
+        height: 330px;
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    /* Search Bar - Slightly Enhanced */
+    .search-section {
+        max-width: 900px;
+        margin: 3rem auto 4rem auto;
+        padding: 0 1rem;
+    }
+
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        padding: 1rem 1.8rem;
+        border-radius: 60px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        width: 100%;
+        font-size: 1.1rem;
+        color: #555;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+        .search-wrapper:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-wrapper i {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-right: 1.2rem;
+        }
+
+        .search-wrapper input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 1.1rem;
+            background: transparent;
+            color: #2e2e3a;
+            font-family: 'Poppins', sans-serif;
+        }
+
+            .search-wrapper input::placeholder {
+                color: #a0aec0;
+            }
+
+    /* Table - Slightly Enhanced */
+    .table-wrapper {
+        background: #fff;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+        margin-bottom: 4.5rem;
+        max-width: 95vw;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: linear-gradient(90deg, #667eea, #9F7AEA);
+        color: white;
+    }
+
+        thead th {
+            padding: 1rem;
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+            thead th:first-child {
+                border-radius: 12px 0 0 0;
+            }
+
+            thead th:last-child {
+                border-radius: 0 12px 0 0;
+            }
+
+    tbody td {
+        text-align: center;
+        padding: 0.9rem;
+        color: #4a5568;
+        font-size: 0.92rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f8fafc;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f5f9;
+    }
+
+    .badge-status {
+        padding: 0.5rem 0.85rem;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        min-width: 80px;
+        justify-content: center;
+    }
+
+    .badge-open {
+        background-color: rgba(102, 214, 161, 0.15);
+        color: #38a169;
+    }
+
+    .badge-closed {
+        background-color: rgba(245, 101, 101, 0.15);
+        color: #e53e3e;
+    }
+    /* Pagination Styles */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .page-nav, .page-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #fff;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .page-nav {
+        font-size: 1.2rem;
+    }
+
+        .page-nav:hover, .page-number:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+    .page-number.active {
+        background: #667eea;
+        color: white;
+    }
+
+    .page-numbers {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .footer {
+        background-color: #f2f2f2; /* greyish-white */
+        border-top: 1px solid #dcdcdc;
+    }
+
+    .footer-text {
+        color: #555;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .footer-links {
+        font-size: 0.85rem;
+    }
+
+    .footer-link {
+        color: #3399cc; /* skyblue */
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+        .footer-link:hover {
+            text-decoration: underline;
+            color: #2a88b3; /* slightly darker on hover */
+        }
+
+
+
+
+</style>
+<h1 >Dashboard</h1>
+
+<div class="container">
+    <!-- Cards Section -->
+    <div class="row text-center mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="stat-card bg-sky">
+                <div class="stat-icon">
+                    <i class="mdi mdi-account-multiple"></i>
+                </div>
+                <div class="stat-text">
+                    <h6>Total Companies</h6>
+                    <div class="stat-number">@Model.TotalEmployer</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card bg-purple">
+                <div class="stat-icon">
+                    <i class="mdi mdi-briefcase-check"></i>
+                </div>
+                <div class="stat-text">
+                    <h6>Total Vacancies</h6>
+                    <div class="stat-number">@Model.TotalJobPost</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card bg-yellow">
+                <div class="stat-icon">
+                    <i class="mdi mdi-calendar-month"></i>
+                </div>
+                <div class="stat-text">
+                    <h6>Monthly Posts</h6>
+                    <div class="stat-number">@Model.MonthlyJobPost</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart Title -->
+    <h3 class="chart-title">Job Title Distribution</h3>
+
+    <!-- Pie Chart -->
+    <div class="chart-container">
+        <canvas id="jobPieChart"></canvas>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+        <div class="search-wrapper">
+            <i class="mdi mdi-magnify"></i>
+            <input type="text" id="jobSearch" placeholder="Search job titles..." />
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th><i class="mdi mdi-pound"></i> Vacancy No</th>
+                    <th><i class="mdi mdi-briefcase"></i> Title</th>
+                    <th><i class="mdi mdi-file-document"></i> Description</th>
+                    <th><i class="mdi mdi-domain"></i> Company</th>
+                    <th><i class="mdi mdi-tag"></i> Type</th>
+                    <th><i class="mdi mdi-calendar"></i> Deadline</th>
+                    <th><i class="mdi mdi-map-marker"></i> Location</th>
+                    <th><i class="mdi mdi-currency-usd"></i> Salary</th>
+                    <th><i class="mdi mdi-check-circle"></i> Status</th>
+                </tr>
+            </thead>
+            <tbody id="jobTableBody">
+                @if (Model.JobVacancyList != null && Model.JobVacancyList.Any())
+                {
+                    foreach (var item in Model.JobVacancyList)
+                    {
+                        <tr>
+                            <td>@item.VacancyNo</td>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.Company</td>
+                            <td>@item.Type</td>
+                            <td>@item.DeadLine.ToString("MMM dd, yyyy")</td>
+                            <td>@item.Location</td>
+                            <td>@item.Salary.ToString("C")</td>
+                            <td>
+                                <span class="badge-status @(item.Status == "Open" ? "badge-open" : "badge-closed")">
+                                    <i class="mdi @(item.Status == "Open" ? "mdi-check-circle" : "mdi-close-circle")"></i>
+                                    @item.Status
+                                </span>
+                            </td>
+                        </tr>
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">No job vacancies available.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <div class="pagination">
+                <a href="#" class="page-nav" id="prevPage"><i class="mdi mdi-chevron-left"></i></a>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <a href="#" class="page-nav" id="nextPage"><i class="mdi mdi-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-5">
+        <div class="container text-center py-4">
+            <p class="footer-text mb-1">© 2025 Elevate Workforce Solutions. All rights reserved.</p>
+            <p class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a> |
+                <a href="#" class="footer-link">Terms of Service</a> |
+                <a href="#" class="footer-link">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+            const labels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.JobVacancyList.Select(j => j.Title).Distinct()));
+            const counts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+    Model.JobVacancyList
+      .GroupBy(j => j.Title)
+      .Select(g => g.Count())
+    ));
+
+            const ctx = document.getElementById('jobPieChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Job Titles',
+                        data: counts,
+                        backgroundColor: [
+                            '#667eea',
+                            '#9F7AEA',
+                            '#F6D365',
+                            '#764ba2',
+                            '#667EEA',
+                            '#FDA085',
+                            '#5f7ddb',
+                            '#9c76f9',
+                            '#f5e279'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 15,
+                        hoverBorderColor: '#fff',
+                        hoverBorderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '65%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    family: "'Poppins', sans-serif",
+                                    size: 12,
+                                    weight: 500
+                                },
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#4a5568',
+                            titleFont: {
+                                family: "'Poppins', sans-serif",
+                                size: 14,
+                                weight: 600
+                            },
+                            bodyFont: {
+                                family: "'Poppins', sans-serif",
+                                size: 12
+                            },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            usePointStyle: true
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('jobSearch');
+            const tableBody = document.getElementById('jobTableBody');
+
+            searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                const rows = tableBody.querySelectorAll('tr');
+
+                rows.forEach(row => {
+                    const titleCell = row.children[1]; // Title column
+                    if (titleCell) {
+                        const titleText = titleCell.textContent.toLowerCase();
+                        row.style.display = titleText.includes(query) ? '' : 'none';
+                    }
+                });
+            });
+          
+         document.addEventListener('DOMContentLoaded', function() {
+        const tableBody = document.getElementById('jobTableBody');
+        const pageNumbers = document.getElementById('pageNumbers');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+
+        // Configuration - NOW SET TO 3 VACANCIES PER PAGE
+        const rowsPerPage = 3;
+        let currentPage = 1;
+
+        // Get all table rows (filter out any empty rows if needed)
+        let rows = Array.from(tableBody.querySelectorAll('tr')).filter(row =>
+            row.style.display !== 'none' && !row.querySelector('td[colspan]')
+        );
+
+        // Calculate total pages
+        function getTotalPages() {
+            return Math.ceil(rows.length / rowsPerPage);
+        }
+
+        // Function to display rows for current page
+        function displayRows() {
+            // Hide all rows
+            rows.forEach(row => row.style.display = 'none');
+
+            // Calculate start and end index
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            // Show rows for current page
+            const visibleRows = rows.slice(start, end);
+            visibleRows.forEach(row => row.style.display = '');
+
+            // Update pagination controls
+            updatePagination();
+        }
+
+            // Function to update pagination numbers
+            function updatePagination() {
+                pageNumbers.innerHTML = '';
+                const totalPages = getTotalPages();
+
+                // Always show first page
+                addPageNumber(1);
+
+                // Show ellipsis if needed
+                if (currentPage > 3) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    pageNumbers.appendChild(ellipsis);
+                }
+
+                // Show current page and nearby pages
+                const startPage = Math.max(2, currentPage - 1);
+                const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+                for (let i = startPage; i <= endPage; i++) {
+                    addPageNumber(i);
+                }
+
+                // Show ellipsis if needed
+                if (currentPage < totalPages - 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    pageNumbers.appendChild(ellipsis);
+                }
+
+                // Always show last page if there's more than one page
+                if (totalPages > 1) {
+                    addPageNumber(totalPages);
+                }
+
+                // Update nav button states
+                prevPage.classList.toggle('disabled', currentPage === 1);
+                nextPage.classList.toggle('disabled', currentPage === totalPages);
+            }
+
+            // Helper function to add a page number button
+            function addPageNumber(page) {
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.className = 'page-number';
+                if (page === currentPage) pageLink.classList.add('active');
+                pageLink.textContent = page;
+                pageLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentPage = page;
+                    displayRows();
+                });
+                pageNumbers.appendChild(pageLink);
+            }
+
+            // Event listeners for prev/next buttons
+            prevPage.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayRows();
+                }
+            });
+
+            nextPage.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentPage < getTotalPages()) {
+                    currentPage++;
+                    displayRows();
+                }
+            });
+
+            // Initialize
+            displayRows();
+
+            // Make search work with pagination
+            const searchInput = document.getElementById('jobSearch');
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                rows = Array.from(tableBody.querySelectorAll('tr')).filter(row => {
+                    if (row.querySelector('td[colspan]')) return false;
+                    const titleCell = row.children[1];
+                    return titleCell.textContent.toLowerCase().includes(query);
+                });
+                currentPage = 1;
+                displayRows();
+            });
+        });
+  
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@model ElevateWorkForce.Models.JobType
+
+@{
+    ViewData["Title"] = "Delete Job Type";
+}
+
+<div class="jobtype-container">
+    <div class="jobtype-header">
+        <h2>Delete Job Type</h2>
+        <p class="text-danger">Are you sure you want to delete this job type?</p>
+    </div>
+
+    <div class="delete-confirmation">
+        <dl class="row">
+            <dt class="col-sm-4">Job Type Name:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+        </dl>
+
+        <form asp-action="Delete" class="jobtype-actions">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                <i class="mdi mdi-delete"></i> Confirm Delete
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="mdi mdi-arrow-left"></i> Cancel
+            </a>
+        </form>
+    </div>
+</div>

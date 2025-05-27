@@ -1,0 +1,36 @@
+﻿@model ElevateWorkForce.Models.EducationalQualification
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="jobtype-container">
+    <h1 class="jobtype-header">Create Educational Qualification</h1>
+
+    <form asp-action="Create" class="jobtype-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Level" class="control-label"></label>
+            <input asp-for="Level" class="form-control" />
+            <span asp-validation-for="Level" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Board" class="control-label"></label>
+            <input asp-for="Board" class="form-control" />
+            <span asp-validation-for="Board" class="text-danger"></span>
+        </div>
+
+        <div class="jobtype-actions">
+            <input type="submit" value="Create" class="btn-primary" />
+            <a asp-action="Index" class="btn-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

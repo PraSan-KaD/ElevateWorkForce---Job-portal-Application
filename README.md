@@ -49,7 +49,8 @@ Provides a high-level overview of system interaction.
 ### Level 1 DFD
 Details user registration, job listing, and application data flows.
 
-![Level 1 DFD](https://github.com/user-attachments/assets/3588f2df-64ea-4053-a7fc-5a821b05bdc0)
+![Level 1 DFD]![image](https://github.com/user-attachments/assets/731c0aa9-0872-435a-91a6-7c1893fde209)
+
 
 ---
 

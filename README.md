@@ -94,7 +94,6 @@ The application is developed using **MVC (Model-View-Controller)** architecture:
 - Job Seeker Dashboard: Browse and apply to job listings
 - Admin Dashboard: Track statistics like total companies, job seekers, and jobs
 - Pagination for job listing views
-- Application tracking (visible to the company who posted the job)
 - Form validation and security checks
 
 

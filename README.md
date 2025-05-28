@@ -1,4 +1,4 @@
-#Wireframes
+# Wireframes
 ![Screenshot 2025-05-20 185223](https://github.com/user-attachments/assets/6fbb9f92-4f23-476e-b4d2-bb196356443f)
 ![Screenshot 2025-05-20 185304](https://github.com/user-attachments/assets/da75789f-3cb5-42b4-a15f-05fe4d8c33a5)
 ![Screenshot 2025-05-20 184043](https://github.com/user-attachments/assets/91c8627d-e09c-47d9-ad5e-b694b3f603b6)
@@ -23,5 +23,5 @@
 ![sqnce](https://github.com/user-attachments/assets/51083ca8-1d78-4d3a-b7d3-025364a1dfd4)
 
 
-#Use case Diagram
+# Use case Diagram
 ![Screenshot 2025-05-25 194423](https://github.com/user-attachments/assets/93288433-2403-481a-8fed-bf985ecc56f7)
